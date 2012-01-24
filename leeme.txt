@@ -1,0 +1,47 @@
+/*Html2json parser Codeigniter*/
+
+Ficheros del parseador:
+---------------------------------
+-xmlparser_helper.php
+-json2html.js
+
+Ficheros Ejemplo CI:
+----------------------------
+-html2json.php:     controlador.
+-html2json_view:   vista del controlador.
+-html_view:						 vista html de ejemplo que parsearemos.
+-json_view:						 vista que contiene el json devuelto.
+
+Ficheros JQuery:
+-----------------------------
+jquery.easing.1.3.js
+jquery.tools.min.js
+
+
+----------------------------------
+xmlparser
+----------------------------------
+El fichero xmlparser_helper.php, como su nombre indica es el helper para codeigniter que parseará un html a array, para ello llamaremos a la función con el html que queramos parsear como parámetro.
+	
+		-xml2array(html);
+
+En el ejemplo que contiene el controlador, guardamos código html en la variable $contents, que es el parámetro para xml2array, codificamos el array generado a json y mostramos el resultado en la vista json_view.
+
+ 			 $contents = $this->load->view('html_view', '',true);
+			 $array = xml2array($contents);
+			 $result['code'] = json_encode($array);
+			 $this->load->view('json_view',$result);
+
+----------------------------
+json2html.js
+----------------------------
+Este fichero parsea un json para imprimir un html, para ello utilizaremos la función json2html a la que pasaremos dos parámetros: 
+
+	-la url donde se ubica el json 
+  -elemento donde queramos insertar el html.
+
+En la vista del controlador del ejemplo llamamos a una función del controlador que nos devuelve un json y el lugar donde queremos insertar el hmtl es 'body'.
+
+	-json2html('<?=base_url();?>html2json/ajax_leerHtml', 'body')
+
+
